@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace GameLibrary.Game
 {
     /// <summary>
-    /// Класс с характеристиками игрока
+    /// Стандартная характеристика игрока
     /// </summary>
     public class PlayerProperitiesStandart : PlayerProperities
     {
@@ -30,6 +26,6 @@ namespace GameLibrary.Game
         /// количество и радиус мин
         /// (количество, радиус)
         /// </summary>
-        public override List<(int, int)> mines { get; set; } = new List<(int, int)>();
+        public override List<(int, int)> Mines { get; set; }
     }
 }

@@ -9,20 +9,32 @@ namespace GameLibrary.Game
     public static class GameEvents
     {
         /// <summary>
-        /// Делегат события изменения списка мин
+        /// Делегат события изменения количества мин в окне
         /// </summary>
         /// <param name="mines"></param>
-        public delegate void ChangeMinesListDelegate(List<Mine> mines);
+        public delegate void ChangeMinesListDelegate(List<(int, int)> mines);
 
         /// <summary>
-        /// Событие изменения списка мин
+        /// Событие изменения количества мин в окне
         /// </summary>
         public static ChangeMinesListDelegate ChangeMinesList { get; set; }
+
+        /// <summary>
+        /// Делегат события изменения количества мин в окне
+        /// </summary>
+        /// <param name="mines"></param>
+        public delegate void AddMinesListToPlayerDelegate();
+
+        /// <summary>
+        /// Событие изменения количества мин в окне
+        /// </summary>
+        public static AddMinesListToPlayerDelegate AddMinesListToPlayer { get; set; }
 
         /// <summary>
         /// Делегат события окончания игры
         /// </summary>
         public delegate void EndGameDelegate(string winPlayer);
+
         /// <summary>
         /// Событие окончания игры
         /// </summary>

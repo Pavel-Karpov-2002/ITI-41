@@ -1,17 +1,19 @@
-﻿using EngineLibrary.EngineComponents;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace GameLibrary.Game
 {
+    /// <summary>
+    /// Характеристика игрока
+    /// </summary>
     public abstract class PlayerProperities
     {
         /// <summary>
-        /// Запас здоровья игрока
+        /// Скорость ограка (длина клеточки)
         /// </summary>
         public abstract float Speed { get; protected set; }
 
         /// <summary>
-        /// Время перезарядки
+        /// Время перезарядки создания мины
         /// </summary>
         public abstract float ReloadBuildMineTime { get; }
 
@@ -25,6 +27,6 @@ namespace GameLibrary.Game
         /// количество и радиус мин
         /// (количество, радиус)
         /// </summary>
-        public abstract List<(int, int)> mines { get; set; }
+        public abstract List<(int, int)> Mines { get; set; }
     }
 }

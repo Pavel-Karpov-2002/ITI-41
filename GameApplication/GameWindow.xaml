@@ -54,8 +54,9 @@
             <TextBlock x:Name="TextCountCoins" TextWrapping="Wrap" Text="500" VerticalAlignment="Top" FontSize="72" HorizontalAlignment="Center" FontFamily="Bauhaus 93" Foreground="#FFF4FF00" Margin="0,13,0,0"/>
             <Grid Width="150" HorizontalAlignment="Left">
                 <Image Source="Images/Mine_1.png"/>
-                <Image Source="Images/Coin.png" Margin="0,409,79,215"/>
-                <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="10 | X1" VerticalAlignment="Center" Margin="0,0,0,-200" FontSize="36" FontFamily="Arial Black"/>
+                <Image Source="Images/Coin.png" Margin="0,195,0,0" Width="86"/>
+                <TextBlock x:Name="TextPriceMine_1" HorizontalAlignment="Center" TextWrapping="Wrap" Text="10" VerticalAlignment="Center" Margin="0,0,0,-200" FontSize="36" FontFamily="Arial Black"/>
+                <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="X1" VerticalAlignment="Center" FontSize="36" FontFamily="Arial Black" Margin="0,0,0,201"/>
                 <Grid Margin="0,320,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
                     <Button x:Name="ButtonAddMineOne" Style="{StaticResource ButtonStyle}" Content="+" Click="Button_Click_Buy_Mine_1" 
                         FontSize="48" FontFamily="Artifakt Element Heavy" Cursor="Hand" Background="#FFDDDDDD" BorderBrush="Black" Foreground="Black" BorderThickness="0,0,0,5" HorizontalAlignment="Center" VerticalAlignment="Top" Height="70" Width="50" />
@@ -68,8 +69,9 @@
             </Grid>
             <Grid Width="150" Margin="-5,0,0,0" HorizontalAlignment="Center">
                 <Image Source="Images/Mine_2.png"/>
-                <Image Source="Images/Coin.png" Margin="0,409,79,215"/>
-                <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="30 | X2" VerticalAlignment="Center" Margin="0,0,0,-200" FontSize="36" FontFamily="Arial Black"/>
+                <Image Source="Images/Coin.png" Margin="0,195,0,0" Width="86"/>
+                <TextBlock x:Name="TextPriceMine_2" HorizontalAlignment="Center" TextWrapping="Wrap" Text="30" VerticalAlignment="Center" Margin="0,0,0,-200" FontSize="36" FontFamily="Arial Black"/>
+                <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="X2" VerticalAlignment="Center" FontSize="36" FontFamily="Arial Black" Margin="0,0,0,201"/>
                 <Grid Margin="0,320,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
                     <Button x:Name="ButtonAddMineTwo" Style="{StaticResource ButtonStyle}" Content="+" Click="Button_Click_Buy_Mine_2" 
                         FontSize="48" FontFamily="Artifakt Element Heavy" Cursor="Hand" Background="#FFDDDDDD" BorderBrush="Black" Foreground="Black" BorderThickness="0,0,0,5" HorizontalAlignment="Center" VerticalAlignment="Center" Height="70" Width="50" />
@@ -82,8 +84,9 @@
             </Grid>
             <Grid Width="150" Grid.ColumnSpan="1" HorizontalAlignment="Right">
                 <Image Source="Images/Mine_3.png"/>
-                <Image Source="Images/Coin.png" Margin="0,409,79,215"/>
-                <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="60 | X3" VerticalAlignment="Center" Margin="0,0,0,-200" FontSize="36" FontFamily="Arial Black"/>
+                <Image Source="Images/Coin.png" Margin="0,195,0,0" Width="86"/>
+                <TextBlock x:Name="TextPriceMine_3" HorizontalAlignment="Center" TextWrapping="Wrap" Text="60" VerticalAlignment="Center" Margin="0,0,0,-200" FontSize="36" FontFamily="Arial Black"/>
+                <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="X3" VerticalAlignment="Center" FontSize="36" FontFamily="Arial Black" Margin="0,0,0,201"/>
                 <Grid Margin="0,320,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
                     <Button x:Name="ButtonAddMineThree" Style="{StaticResource ButtonStyle}" Content="+" Click="Button_Click_Buy_Mine_3" 
                         FontSize="48" FontFamily="Artifakt Element Heavy" Cursor="Hand" Background="#FFDDDDDD" BorderBrush="Black" Foreground="Black" BorderThickness="0,0,0,5" HorizontalAlignment="Center" VerticalAlignment="Center" Height="70" Width="50" />
@@ -107,15 +110,32 @@
 
         <Grid Grid.Row="0" Grid.ColumnSpan="3" HorizontalAlignment="Center" VerticalAlignment="Center" Height="684" Width="960">
             <Grid RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Center" VerticalAlignment="Bottom">
-                <Button x:Name="ButtonSuccess" Style="{StaticResource ButtonStyle}" Content="Готов" Click="Button_Click_CreateServer" 
-                        FontSize="25" FontFamily="Artifakt Element Heavy" Cursor="Hand" Background="#FFDDDDDD" BorderBrush="Black" Foreground="Black" BorderThickness="0,0,0,5" Height="50" Width="200" Margin="0,0,0,50" />
+                <Button x:Name="ButtonSuccess" Style="{StaticResource ButtonStyle}" Content="Готов" Click="Button_Click_Ready" 
+                        FontSize="25" FontFamily="Artifakt Element Heavy" Cursor="Hand" Background="#FFDDDDDD" BorderBrush="Black" Foreground="Black" BorderThickness="0,0,0,5" Height="50" Width="200" Margin="0,0,0,50" VerticalAlignment="Bottom" />
             </Grid>
         </Grid>
 
         <Grid Grid.Column="0">
-            <Grid x:Name="BluePlayerPanel" HorizontalAlignment="Left" Height="300.2" Margin="8,0,0,0" VerticalAlignment="Center" Width="120.8" Visibility="Hidden">
-                <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="Player 1" VerticalAlignment="Top" Foreground="White" FontFamily="Arial Rounded MT Bold" FontSize="20" Width="104" Height="30" 
-                           Margin="8,8,8.8,0" TextAlignment="Center"/>
+            <Grid x:Name="InfoPanel" HorizontalAlignment="Left" Margin="8,0,0,0" Width="120.8" Visibility="Hidden">
+                <Image Source="Images/Mine_1.png" VerticalAlignment="Top"/>
+                <TextBlock x:Name="Text_Mine_1_Count" Text="0" VerticalAlignment="Top" Foreground="White" FontFamily="Bauhaus 93" FontSize="48" TextAlignment="Center" Margin="0,35,0,0" FontWeight="Bold" TextWrapping="Wrap">
+                    <TextBlock.Effect>
+                        <DropShadowEffect BlurRadius="1" Direction="325" ShadowDepth="6"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+                <Image Source="Images/Mine_2.png" VerticalAlignment="Center"/>
+                <TextBlock x:Name="Text_Mine_2_Count" Text="0" VerticalAlignment="Center" Foreground="White" FontFamily="Bauhaus 93" FontSize="48" TextAlignment="Center" Margin="0,16,0,0" FontWeight="Bold" TextWrapping="Wrap">
+                    <TextBlock.Effect>
+                        <DropShadowEffect BlurRadius="1" Direction="325" ShadowDepth="6"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+                <Image Source="Images/Mine_3.png" VerticalAlignment="Bottom"/>
+                <TextBlock x:Name="Text_Mine_3_Count" Text="0" VerticalAlignment="Bottom" Foreground="White" FontFamily="Bauhaus 93" FontSize="48" TextAlignment="Center" FontWeight="Bold" TextWrapping="Wrap" Margin="0,0,0,15">
+                    <TextBlock.Effect>
+                        <DropShadowEffect BlurRadius="1" Direction="325" ShadowDepth="6"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+                
             </Grid>
 
         </Grid>

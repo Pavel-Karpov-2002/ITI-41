@@ -2,6 +2,7 @@
 using EngineLibrary.ObjectComponents;
 using GameLibrary.Game;
 using SharpDX;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 
@@ -61,7 +62,8 @@ namespace GameLibrary.Maze
         /// </summary>
         public void CreateMaze()
         {
-            string text = "Resources/Mazes/Maze 1.bmp";
+            Random rnd = new Random();
+            string text = "Resources/Mazes/Maze_" + (rnd.Next(1, 3)) + ".bmp";
 
             Bitmap bitmap = new Bitmap(text);
 
@@ -75,10 +77,12 @@ namespace GameLibrary.Maze
 
                     if (color.R == 0 && color.G == 0 && color.B == 0)
                         gameObject = ElementsFactory.CreateMazeElement(new Vector2(j, i), "Wall");
-                    else if (color.R == 255 && color.G == 0 && color.B == 0)
+                    else if (color.R == 0 && color.G == 0 && color.B == 255)
                         gameObject = ElementsFactory.CreateMazeElement(new Vector2(j, i), "StrengthWall_3");
-                    else if (color.R == 0 && color.G == 0 && color.B == 125)
-                        PlayerFactory.Add(new PlayerConstructor() { StartPosition = new Vector2(j, i) });
+                    else if (color.R == 0 && color.G == 255 && color.B == 0)
+                        gameObject = ElementsFactory.CreateMazeElement(new Vector2(j, i), "BreakWall");
+                    else if (color.R == 255 && color.G == 0 && color.B == 0)
+                        PlayerFactory.Add(new PlayerConstructor() { StartPosition = new Vector2(j, i) }); // Отправлять позиции игроков на сервер, там их смешать и раздать клиентам
                     else
                         emptyBlocks.Add(new Vector2(j, i));
 

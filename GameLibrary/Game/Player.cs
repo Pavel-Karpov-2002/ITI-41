@@ -3,6 +3,7 @@ using EngineLibrary.ObjectComponents;
 using GameLibrary.Maze;
 using GameLibrary.Mines;
 using SharpDX;
+using SharpDX.Direct2D1;
 using SharpDX.DirectInput;
 using System.Collections.Generic;
 
@@ -35,6 +36,7 @@ namespace GameLibrary.Game
 
         private float movingTimer;
         private float reloadBuildMineTime;
+        private int numActiveMine;
 
         /// <summary>
         /// Поведение на момент создание игрового объекта
@@ -42,12 +44,11 @@ namespace GameLibrary.Game
         public override void Start(GameObject gameObject = null)
         {
             maze = MazeScene.instance;
+            numActiveMine = 0;
             Property = new PlayerProperitiesStandart();
-            Property.mines = new List<(int, int)>();
-            Property.mines.Add((1, 2));
-            Property.mines.Add((3, 4));
-            Property.mines.Add((1, 5));
-            Control = new PlayerControl(AxisOfInput.Horizontal, AxisOfInput.Vertical, Key.Space);
+            GameEvents.ChangeMinesList += ChangeMinesList;
+            GameEvents.AddMinesListToPlayer?.Invoke();
+            Control = new PlayerControl(AxisOfInput.Horizontal, AxisOfInput.Vertical, Key.Space, Key.NumberPad1, Key.NumberPad2, Key.NumberPad3);
         }
 
         /// <summary>
@@ -70,10 +71,18 @@ namespace GameLibrary.Game
             if (reloadBuildMineTime >= 0)
                 reloadBuildMineTime -= Time.DeltaTime;
 
+            for (int i = 0; i < Control.GetMines.Length; i++)
+            {
+                if (Input.GetButtonDown(Control.GetMines[i]))
+                {
+                    numActiveMine = i;
+                }
+            }
+
             if(Input.GetButtonDown(Control.SpawnMine) && reloadBuildMineTime <= 0)
             {
                 reloadBuildMineTime = Property.ReloadBuildMineTime;
-                SpawnMine(gameObject, 0);
+                SpawnMine(gameObject, numActiveMine);
             }
         }
 
@@ -110,10 +119,15 @@ namespace GameLibrary.Game
         /// <param name="numberMine"></param>
         private void SpawnMine(GameObject playerObject, int numberMine)
         {
-            Mine mine = new Mine(Property.ReloadBuildMineTime);
-            mine = new DecoratorMineRadius(mine, Property.mines[numberMine].Item2);
-
-            maze.AddObjectOnScene(CreateMineComponent.CreateMine(playerObject.Transform.Position, mine, "Mine_" + (numberMine + 1) + ".png"));
+            var mines = Property.Mines[numberMine];
+            if (mines.Item1 > 0)
+            {
+                Mine mine = new Mine(Property.ReloadBuildMineTime);
+                mine = new DecoratorMineRadius(mine, mines.Item2);
+                Property.Mines[numberMine] = (mines.Item1 - 1, mines.Item2);
+                GameEvents.ChangeMinesList?.Invoke(Property.Mines);
+                maze.AddObjectOnScene(CreateMineComponent.CreateMine(playerObject.Transform.Position, mine, "Mine_" + (numberMine + 1) + ".png"));
+            }
         }
 
         /// <summary>
@@ -125,6 +139,12 @@ namespace GameLibrary.Game
             {
                 gameObject.Transform.ResetMovement();
             }
+        }
+
+        private void ChangeMinesList(List<(int, int)> mines)
+        {
+            Property.Mines = new List<(int, int)>(mines);
+            GameEvents.ChangeMinesList -= ChangeMinesList;
         }
 
         /// <summary>
@@ -158,16 +178,22 @@ namespace GameLibrary.Game
         public Key SpawnMine { get; private set; }
 
         /// <summary>
+        /// Создание мины
+        /// </summary>
+        public Key[] GetMines { get; private set; }
+
+        /// <summary>
         /// Конструктор структуры
         /// </summary>
         /// <param name="horizontalAxis">Горизонтальная ось передвижения</param>
         /// <param name="verticalAxis"> Вертикальная ось передвижения</param>
         /// <param name="spawnMine">Создание бомбы</param>
-        public PlayerControl(AxisOfInput horizontalAxis, AxisOfInput verticalAxis, Key spawnMine)
+        public PlayerControl(AxisOfInput horizontalAxis, AxisOfInput verticalAxis, Key spawnMine, params Key[] getMines)
         {
             SpawnMine = spawnMine;
             HorizontalAxis = horizontalAxis;
             VerticalAxis = verticalAxis;
+            GetMines = getMines;
         }
     }
 }
