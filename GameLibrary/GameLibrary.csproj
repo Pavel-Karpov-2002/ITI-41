@@ -1,0 +1,353 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{34D614E7-86F8-47B8-A355-433B62A5A656}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>GameLibrary</RootNamespace>
+    <AssemblyName>GameLibrary</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\GameLibrary.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="SharpDX, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpDX.4.2.0\lib\net45\SharpDX.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.Desktop, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpDX.Desktop.4.2.0\lib\net45\SharpDX.Desktop.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.Direct2D1, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpDX.Direct2D1.4.2.0\lib\net45\SharpDX.Direct2D1.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.DirectInput, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpDX.DirectInput.4.2.0\lib\net45\SharpDX.DirectInput.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.DXGI, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpDX.DXGI.4.2.0\lib\net45\SharpDX.DXGI.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.Mathematics, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpDX.Mathematics.4.2.0\lib\net45\SharpDX.Mathematics.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="obj\Debug\.NETFramework,Version=v4.7.2.AssemblyAttributes.cs" />
+    <Compile Include="obj\Release\.NETFramework,Version=v4.7.2.AssemblyAttributes.cs" />
+    <Compile Include="Walls\Factory\BreakWallFactory.cs" />
+    <Compile Include="Walls\Factory\StrengthWallFactory.cs" />
+    <Compile Include="Walls\Factory\UnbreakableWallFactory.cs" />
+    <Compile Include="Walls\Factory\WallFactory.cs" />
+    <Compile Include="Walls\StrengthWall.cs" />
+    <Compile Include="Walls\UnbreakableWall.cs" />
+    <Compile Include="Walls\Wall.cs" />
+    <Compile Include="Game\GameEvents.cs" />
+    <Compile Include="Game\PlayerProperitiesStandart.cs" />
+    <Compile Include="Game\PlayerProperities.cs" />
+    <Compile Include="Game\TypeProperty.cs" />
+    <Compile Include="Mines\DecoratorMine.cs" />
+    <Compile Include="Mines\Explosion.cs" />
+    <Compile Include="Mines\CreateMineComponent.cs" />
+    <Compile Include="Walls\BreakWall.cs" />
+    <Compile Include="Maze\MazeScene.cs" />
+    <Compile Include="Maze\MazeElementsFactory.cs" />
+    <Compile Include="Game\PlayerConstructor.cs" />
+    <Compile Include="Game\Player.cs" />
+    <Compile Include="Mines\Mine.cs" />
+    <Compile Include="Mines\DecoratorMineRadius.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="obj\Release\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <None Include="obj\Release\GameLibrary.csproj.CopyComplete" />
+    <None Include="obj\Release\GameLibrary.csproj.CoreCompileInputs.cache" />
+    <None Include="obj\Release\GameLibrary.csprojAssemblyReference.cache" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\EngineLibrary\EngineLibrary.csproj">
+      <Project>{d5184c3c-1288-499a-8163-7d52cb099b23}</Project>
+      <Name>EngineLibrary</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="bin\Debug\GameLibrary.dll" />
+    <Content Include="bin\Debug\GameLibrary.pdb" />
+    <Content Include="bin\Release\EngineLibrary.dll" />
+    <Content Include="bin\Release\EngineLibrary.pdb" />
+    <Content Include="bin\Release\GameLibrary.dll" />
+    <Content Include="bin\Release\GameLibrary.pdb" />
+    <Content Include="bin\Release\Resources\Blue Player\Arms\arms left idle 1.png" />
+    <Content Include="bin\Release\Resources\Blue Player\Arms\arms left idle 2.png" />
+    <Content Include="bin\Release\Resources\Blue Player\Arms\arms left run 1.png" />
+    <Content Include="bin\Release\Resources\Blue Player\Arms\arms left run 2.png" />
+    <Content Include="bin\Release\Resources\Blue Player\Arms\arms left run 3.png" />
+    <Content Include="bin\Release\Resources\Blue Player\Arms\arms left run 4.png" />
+    <Content Include="bin\Release\Resources\Blue Player\Arms\arms right idle 1.png" />
+    <Content Include="bin\Release\Resources\Blue Player\Arms\arms right idle 2.png" />
+    <Content Include="bin\Release\Resources\Blue Player\Arms\arms right run 1.png" />
+    <Content Include="bin\Release\Resources\Blue Player\Arms\arms right run 2.png" />
+    <Content Include="bin\Release\Resources\Blue Player\Arms\arms right run 3.png" />
+    <Content Include="bin\Release\Resources\Blue Player\Arms\arms right run 4.png" />
+    <Content Include="bin\Release\Resources\Blue Player\damage Gun\damage left idle 1.png" />
+    <Content Include="bin\Release\Resources\Blue Player\damage Gun\damage left idle 2.png" />
+    <Content Include="bin\Release\Resources\Blue Player\damage Gun\damage left run 1.png" />
+    <Content Include="bin\Release\Resources\Blue Player\damage Gun\damage left run 2.png" />
+    <Content Include="bin\Release\Resources\Blue Player\damage Gun\damage left run 3.png" />
+    <Content Include="bin\Release\Resources\Blue Player\damage Gun\damage left run 4.png" />
+    <Content Include="bin\Release\Resources\Blue Player\damage Gun\damage right idle 1.png" />
+    <Content Include="bin\Release\Resources\Blue Player\damage Gun\damage right idle 2.png" />
+    <Content Include="bin\Release\Resources\Blue Player\damage Gun\damage right run 1.png" />
+    <Content Include="bin\Release\Resources\Blue Player\damage Gun\damage right run 2.png" />
+    <Content Include="bin\Release\Resources\Blue Player\damage Gun\damage right run 3.png" />
+    <Content Include="bin\Release\Resources\Blue Player\damage Gun\damage right run 4.png" />
+    <Content Include="bin\Release\Resources\Blue Player\damage left idle 1.png" />
+    <Content Include="bin\Release\Resources\Blue Player\damage left idle 2.png" />
+    <Content Include="bin\Release\Resources\Blue Player\damage left run 1.png" />
+    <Content Include="bin\Release\Resources\Blue Player\damage left run 2.png" />
+    <Content Include="bin\Release\Resources\Blue Player\damage left run 3.png" />
+    <Content Include="bin\Release\Resources\Blue Player\damage left run 4.png" />
+    <Content Include="bin\Release\Resources\Blue Player\damage right idle 1.png" />
+    <Content Include="bin\Release\Resources\Blue Player\damage right idle 2.png" />
+    <Content Include="bin\Release\Resources\Blue Player\damage right run 1.png" />
+    <Content Include="bin\Release\Resources\Blue Player\damage right run 2.png" />
+    <Content Include="bin\Release\Resources\Blue Player\damage right run 3.png" />
+    <Content Include="bin\Release\Resources\Blue Player\damage right run 4.png" />
+    <Content Include="bin\Release\Resources\Blue Player\frezze Gun\frezze left idle 1.png" />
+    <Content Include="bin\Release\Resources\Blue Player\frezze Gun\frezze left idle 2.png" />
+    <Content Include="bin\Release\Resources\Blue Player\frezze Gun\frezze left run 1.png" />
+    <Content Include="bin\Release\Resources\Blue Player\frezze Gun\frezze left run 2.png" />
+    <Content Include="bin\Release\Resources\Blue Player\frezze Gun\frezze left run 3.png" />
+    <Content Include="bin\Release\Resources\Blue Player\frezze Gun\frezze left run 4.png" />
+    <Content Include="bin\Release\Resources\Blue Player\frezze Gun\frezze right idle 1.png" />
+    <Content Include="bin\Release\Resources\Blue Player\frezze Gun\frezze right idle 2.png" />
+    <Content Include="bin\Release\Resources\Blue Player\frezze Gun\frezze right run 1.png" />
+    <Content Include="bin\Release\Resources\Blue Player\frezze Gun\frezze right run 2.png" />
+    <Content Include="bin\Release\Resources\Blue Player\frezze Gun\frezze right run 3.png" />
+    <Content Include="bin\Release\Resources\Blue Player\frezze Gun\frezze right run 4.png" />
+    <Content Include="bin\Release\Resources\Blue Player\left idle 1.png" />
+    <Content Include="bin\Release\Resources\Blue Player\left idle 2.png" />
+    <Content Include="bin\Release\Resources\Blue Player\left run 1.png" />
+    <Content Include="bin\Release\Resources\Blue Player\left run 2.png" />
+    <Content Include="bin\Release\Resources\Blue Player\left run 3.png" />
+    <Content Include="bin\Release\Resources\Blue Player\left run 4.png" />
+    <Content Include="bin\Release\Resources\Blue Player\right idle 1.png" />
+    <Content Include="bin\Release\Resources\Blue Player\right idle 2.png" />
+    <Content Include="bin\Release\Resources\Blue Player\right run 1.png" />
+    <Content Include="bin\Release\Resources\Blue Player\right run 2.png" />
+    <Content Include="bin\Release\Resources\Blue Player\right run 3.png" />
+    <Content Include="bin\Release\Resources\Blue Player\right run 4.png" />
+    <Content Include="bin\Release\Resources\Blue Player\slowdown Gun\slowdown left idle 1.png" />
+    <Content Include="bin\Release\Resources\Blue Player\slowdown Gun\slowdown left idle 2.png" />
+    <Content Include="bin\Release\Resources\Blue Player\slowdown Gun\slowdown left run 1.png" />
+    <Content Include="bin\Release\Resources\Blue Player\slowdown Gun\slowdown left run 2.png" />
+    <Content Include="bin\Release\Resources\Blue Player\slowdown Gun\slowdown left run 3.png" />
+    <Content Include="bin\Release\Resources\Blue Player\slowdown Gun\slowdown left run 4.png" />
+    <Content Include="bin\Release\Resources\Blue Player\slowdown Gun\slowdown right idle 1.png" />
+    <Content Include="bin\Release\Resources\Blue Player\slowdown Gun\slowdown right idle 2.png" />
+    <Content Include="bin\Release\Resources\Blue Player\slowdown Gun\slowdown right run 1.png" />
+    <Content Include="bin\Release\Resources\Blue Player\slowdown Gun\slowdown right run 2.png" />
+    <Content Include="bin\Release\Resources\Blue Player\slowdown Gun\slowdown right run 3.png" />
+    <Content Include="bin\Release\Resources\Blue Player\slowdown Gun\slowdown right run 4.png" />
+    <Content Include="bin\Release\Resources\Bullets\damage bullet.png" />
+    <Content Include="bin\Release\Resources\Bullets\frezze bullet.png" />
+    <Content Include="bin\Release\Resources\Bullets\slowdown bullet.png" />
+    <Content Include="bin\Release\Resources\MazeElements\BreakWall 1.png" />
+    <Content Include="bin\Release\Resources\MazeElements\BreakWall 2.png" />
+    <Content Include="bin\Release\Resources\MazeElements\BreakWall 3.png" />
+    <Content Include="bin\Release\Resources\MazeElements\BreakWall.png" />
+    <Content Include="bin\Release\Resources\MazeElements\Effects\damage idle 1.png" />
+    <Content Include="bin\Release\Resources\MazeElements\Effects\frezze left idle.png" />
+    <Content Include="bin\Release\Resources\MazeElements\Effects\frezze right idle.png" />
+    <Content Include="bin\Release\Resources\MazeElements\Effects\slowdown left idle 1.png" />
+    <Content Include="bin\Release\Resources\MazeElements\Effects\slowdown left idle 2.png" />
+    <Content Include="bin\Release\Resources\MazeElements\Effects\slowdown right idle 1.png" />
+    <Content Include="bin\Release\Resources\MazeElements\Effects\slowdown right idle 2.png" />
+    <Content Include="bin\Release\Resources\MazeElements\HealthKit.png" />
+    <Content Include="bin\Release\Resources\MazeElements\Platform.png" />
+    <Content Include="bin\Release\Resources\MazeElements\Spawn Guns\damage spawn 1.png" />
+    <Content Include="bin\Release\Resources\MazeElements\Spawn Guns\damage spawn 2.png" />
+    <Content Include="bin\Release\Resources\MazeElements\Spawn Guns\frezze spawn 1.png" />
+    <Content Include="bin\Release\Resources\MazeElements\Spawn Guns\frezze spawn 2.png" />
+    <Content Include="bin\Release\Resources\MazeElements\Spawn Guns\slowdown spawn 1.png" />
+    <Content Include="bin\Release\Resources\MazeElements\Spawn Guns\slowdown spawn 2.png" />
+    <Content Include="bin\Release\Resources\MazeElements\Stair.png" />
+    <Content Include="bin\Release\Resources\MazeElements\Wall.png" />
+    <Content Include="bin\Release\Resources\Mazes\Maze 1.bmp" />
+    <Content Include="bin\Release\Resources\Mazes\Maze 1.png" />
+    <Content Include="bin\Release\Resources\Mazes\Maze 2.bmp" />
+    <Content Include="bin\Release\Resources\Mazes\Maze 2.png" />
+    <Content Include="bin\Release\Resources\Mazes\Maze 3.bmp" />
+    <Content Include="bin\Release\Resources\Mazes\Maze 4.bmp" />
+    <Content Include="bin\Release\Resources\Mazes\Maze 5.bmp" />
+    <Content Include="bin\Release\Resources\Monsters\left idle 1.png" />
+    <Content Include="bin\Release\Resources\Monsters\left idle 2.png" />
+    <Content Include="bin\Release\Resources\Monsters\left run 1.png" />
+    <Content Include="bin\Release\Resources\Monsters\left run 2.png" />
+    <Content Include="bin\Release\Resources\Monsters\left run 3.png" />
+    <Content Include="bin\Release\Resources\Monsters\left run 4.png" />
+    <Content Include="bin\Release\Resources\Monsters\right idle 1.png" />
+    <Content Include="bin\Release\Resources\Monsters\right idle 2.png" />
+    <Content Include="bin\Release\Resources\Monsters\right run 1.png" />
+    <Content Include="bin\Release\Resources\Monsters\right run 2.png" />
+    <Content Include="bin\Release\Resources\Monsters\right run 3.png" />
+    <Content Include="bin\Release\Resources\Monsters\right run 4.png" />
+    <Content Include="bin\Release\Resources\Red Player\Arms\arms left idle 1.png" />
+    <Content Include="bin\Release\Resources\Red Player\Arms\arms left idle 2.png" />
+    <Content Include="bin\Release\Resources\Red Player\Arms\arms left run 1.png" />
+    <Content Include="bin\Release\Resources\Red Player\Arms\arms left run 2.png" />
+    <Content Include="bin\Release\Resources\Red Player\Arms\arms left run 3.png" />
+    <Content Include="bin\Release\Resources\Red Player\Arms\arms left run 4.png" />
+    <Content Include="bin\Release\Resources\Red Player\Arms\arms right idle 1.png" />
+    <Content Include="bin\Release\Resources\Red Player\Arms\arms right idle 2.png" />
+    <Content Include="bin\Release\Resources\Red Player\Arms\arms right run 1.png" />
+    <Content Include="bin\Release\Resources\Red Player\Arms\arms right run 2.png" />
+    <Content Include="bin\Release\Resources\Red Player\Arms\arms right run 3.png" />
+    <Content Include="bin\Release\Resources\Red Player\Arms\arms right run 4.png" />
+    <Content Include="bin\Release\Resources\Red Player\damage Gun\damage left idle 1.png" />
+    <Content Include="bin\Release\Resources\Red Player\damage Gun\damage left idle 2.png" />
+    <Content Include="bin\Release\Resources\Red Player\damage Gun\damage left run 1.png" />
+    <Content Include="bin\Release\Resources\Red Player\damage Gun\damage left run 2.png" />
+    <Content Include="bin\Release\Resources\Red Player\damage Gun\damage left run 3.png" />
+    <Content Include="bin\Release\Resources\Red Player\damage Gun\damage left run 4.png" />
+    <Content Include="bin\Release\Resources\Red Player\damage Gun\damage right idle 1.png" />
+    <Content Include="bin\Release\Resources\Red Player\damage Gun\damage right idle 2.png" />
+    <Content Include="bin\Release\Resources\Red Player\damage Gun\damage right run 1.png" />
+    <Content Include="bin\Release\Resources\Red Player\damage Gun\damage right run 2.png" />
+    <Content Include="bin\Release\Resources\Red Player\damage Gun\damage right run 3.png" />
+    <Content Include="bin\Release\Resources\Red Player\damage Gun\damage right run 4.png" />
+    <Content Include="bin\Release\Resources\Red Player\frezze Gun\frezze left idle 1.png" />
+    <Content Include="bin\Release\Resources\Red Player\frezze Gun\frezze left idle 2.png" />
+    <Content Include="bin\Release\Resources\Red Player\frezze Gun\frezze left run 1.png" />
+    <Content Include="bin\Release\Resources\Red Player\frezze Gun\frezze left run 2.png" />
+    <Content Include="bin\Release\Resources\Red Player\frezze Gun\frezze left run 3.png" />
+    <Content Include="bin\Release\Resources\Red Player\frezze Gun\frezze left run 4.png" />
+    <Content Include="bin\Release\Resources\Red Player\frezze Gun\frezze right idle 1.png" />
+    <Content Include="bin\Release\Resources\Red Player\frezze Gun\frezze right idle 2.png" />
+    <Content Include="bin\Release\Resources\Red Player\frezze Gun\frezze right run 1.png" />
+    <Content Include="bin\Release\Resources\Red Player\frezze Gun\frezze right run 2.png" />
+    <Content Include="bin\Release\Resources\Red Player\frezze Gun\frezze right run 3.png" />
+    <Content Include="bin\Release\Resources\Red Player\frezze Gun\frezze right run 4.png" />
+    <Content Include="bin\Release\Resources\Red Player\left idle 1.png" />
+    <Content Include="bin\Release\Resources\Red Player\left idle 2.png" />
+    <Content Include="bin\Release\Resources\Red Player\left run 1.png" />
+    <Content Include="bin\Release\Resources\Red Player\left run 2.png" />
+    <Content Include="bin\Release\Resources\Red Player\left run 3.png" />
+    <Content Include="bin\Release\Resources\Red Player\left run 4.png" />
+    <Content Include="bin\Release\Resources\Red Player\right idle 1.png" />
+    <Content Include="bin\Release\Resources\Red Player\right idle 2.png" />
+    <Content Include="bin\Release\Resources\Red Player\right run 1.png" />
+    <Content Include="bin\Release\Resources\Red Player\right run 2.png" />
+    <Content Include="bin\Release\Resources\Red Player\right run 3.png" />
+    <Content Include="bin\Release\Resources\Red Player\right run 4.png" />
+    <Content Include="bin\Release\Resources\Red Player\slowdown Gun\slowdown left idle 1.png" />
+    <Content Include="bin\Release\Resources\Red Player\slowdown Gun\slowdown left idle 2.png" />
+    <Content Include="bin\Release\Resources\Red Player\slowdown Gun\slowdown left run 1.png" />
+    <Content Include="bin\Release\Resources\Red Player\slowdown Gun\slowdown left run 2.png" />
+    <Content Include="bin\Release\Resources\Red Player\slowdown Gun\slowdown left run 3.png" />
+    <Content Include="bin\Release\Resources\Red Player\slowdown Gun\slowdown left run 4.png" />
+    <Content Include="bin\Release\Resources\Red Player\slowdown Gun\slowdown right idle 1.png" />
+    <Content Include="bin\Release\Resources\Red Player\slowdown Gun\slowdown right idle 2.png" />
+    <Content Include="bin\Release\Resources\Red Player\slowdown Gun\slowdown right run 1.png" />
+    <Content Include="bin\Release\Resources\Red Player\slowdown Gun\slowdown right run 2.png" />
+    <Content Include="bin\Release\Resources\Red Player\slowdown Gun\slowdown right run 3.png" />
+    <Content Include="bin\Release\Resources\Red Player\slowdown Gun\slowdown right run 4.png" />
+    <Content Include="bin\Release\Resources\Фон.png" />
+    <Content Include="bin\Release\SharpDX.Desktop.dll" />
+    <Content Include="bin\Release\SharpDX.Desktop.pdb" />
+    <Content Include="bin\Release\SharpDX.Desktop.xml" />
+    <Content Include="bin\Release\SharpDX.Direct2D1.dll" />
+    <Content Include="bin\Release\SharpDX.Direct2D1.pdb" />
+    <Content Include="bin\Release\SharpDX.Direct2D1.xml" />
+    <Content Include="bin\Release\SharpDX.DirectInput.dll" />
+    <Content Include="bin\Release\SharpDX.DirectInput.pdb" />
+    <Content Include="bin\Release\SharpDX.DirectInput.xml" />
+    <Content Include="bin\Release\SharpDX.dll" />
+    <Content Include="bin\Release\SharpDX.DXGI.dll" />
+    <Content Include="bin\Release\SharpDX.DXGI.pdb" />
+    <Content Include="bin\Release\SharpDX.DXGI.xml" />
+    <Content Include="bin\Release\SharpDX.Mathematics.dll" />
+    <Content Include="bin\Release\SharpDX.Mathematics.pdb" />
+    <Content Include="bin\Release\SharpDX.Mathematics.xml" />
+    <Content Include="bin\Release\SharpDX.pdb" />
+    <Content Include="obj\Release\GameLibrary.csproj.FileListAbsolute.txt" />
+    <Content Include="obj\Release\GameLibrary.dll" />
+    <Content Include="obj\Release\GameLibrary.pdb" />
+    <Content Include="Resources\Background.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\MazeElements\BreakWall.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\MazeElements\StrengthWall_1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\MazeElements\StrengthWall_2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\MazeElements\StrengthWall_3.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\MazeElements\Wall.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Mazes\Maze 1.bmp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Mines\Explosions\Explosion_1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Mines\Explosions\Explosion_2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Mines\Explosions\Explosion_3.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Mines\Explosions\Explosion_4.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Mines\Mine_1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Mines\Mine_2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Mines\Mine_3.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Player\Player.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
