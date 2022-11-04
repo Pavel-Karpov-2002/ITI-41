@@ -53,7 +53,7 @@ namespace GameLibrary.Maze
 
             foreach (PlayerConstructor player in PlayerFactory)
             {
-                gameObjects.Add(player.CreatePlayer("Player" + player.GetHashCode()));
+                gameObjects.Add(player.CreatePlayer("Player_" + player.GetHashCode()));
             }
         }
 

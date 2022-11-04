@@ -38,7 +38,7 @@
         </Style>
     </Window.Resources>
     <Window.Background>
-        <ImageBrush ImageSource="Images/BackgroundWPF.jpg"/>
+        <ImageBrush x:Name="Image_Background" ImageSource="Images/BackgroundWPF.jpg"/>
     </Window.Background>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -48,7 +48,7 @@
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
 
-        <Grid Grid.Row="0" Grid.ColumnSpan="3" HorizontalAlignment="Center" VerticalAlignment="Center" Height="684" Width="960">
+        <Grid Grid.Row="0" Grid.ColumnSpan="3" x:Name="Grid_Mines" HorizontalAlignment="Center" VerticalAlignment="Center" Height="684" Width="960">
 
             <Image Source="Images/Coin.png" HorizontalAlignment="Center" VerticalAlignment="Top" Width="150" Height="150"/>
             <TextBlock x:Name="TextCountCoins" TextWrapping="Wrap" Text="500" VerticalAlignment="Top" FontSize="72" HorizontalAlignment="Center" FontFamily="Bauhaus 93" Foreground="#FFF4FF00" Margin="0,13,0,0"/>
@@ -102,13 +102,15 @@
         <Grid Grid.Column="1" Cursor="Arrow" Name="grid">
             <WindowsFormsHost x:Name="formhost" Width="1024" Height="700" />
 
-            <Grid x:Name="WinPanel" Margin="331.2,60.8,332,245.6" Visibility="Hidden">
-                <TextBlock x:Name="WinPlayerText" HorizontalAlignment="Center" TextWrapping="Wrap" Text="Blue Player Wins!" VerticalAlignment="Top" Foreground="White" FontFamily="Arial Rounded MT Bold" FontSize="26" Width="260.8" Height="41.6" 
-                           Margin="67.2,0" TextAlignment="Center"/>
+            <Grid x:Name="WinPanel" Visibility="Hidden">
+                <TextBlock x:Name="WinPlayerText" TextWrapping="Wrap" Text="Blue Player Wins!" VerticalAlignment="Top" Foreground="Red" FontFamily="Arial Black" FontSize="36" 
+                           Margin="50,60,50,0" TextAlignment="Center"/>
+                <Button x:Name="Button_To_Menu" Style="{StaticResource ButtonStyle}" Content="Меню" Click="Button_Click_To_Menu" 
+                        FontSize="25" FontFamily="Artifakt Element Heavy" Cursor="Hand" Background="#FFDDDDDD" BorderBrush="Black" Foreground="Black" BorderThickness="0,0,0,5" Height="50" Width="200" VerticalAlignment="Bottom" Margin="0,0,0,50" />
             </Grid>
         </Grid>
 
-        <Grid Grid.Row="0" Grid.ColumnSpan="3" HorizontalAlignment="Center" VerticalAlignment="Center" Height="684" Width="960">
+        <Grid Grid.Row="0" x:Name="Grid_Ready" Grid.ColumnSpan="3" HorizontalAlignment="Center" VerticalAlignment="Center" Height="684" Width="960">
             <Grid RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Center" VerticalAlignment="Bottom">
                 <Button x:Name="ButtonSuccess" Style="{StaticResource ButtonStyle}" Content="Готов" Click="Button_Click_Ready" 
                         FontSize="25" FontFamily="Artifakt Element Heavy" Cursor="Hand" Background="#FFDDDDDD" BorderBrush="Black" Foreground="Black" BorderThickness="0,0,0,5" Height="50" Width="200" Margin="0,0,0,50" VerticalAlignment="Bottom" />

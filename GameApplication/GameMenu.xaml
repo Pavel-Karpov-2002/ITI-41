@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GameApplication"
         mc:Ignorable="d"
-        Title="GameMenu" Height="450" Width="800">
+        Title="Bomberman" Height="700" Width="1312" ResizeMode="NoResize">
     <Window.Resources>
         <Style TargetType="Button" x:Key="ButtonStyle">
             <Style.Setters>
@@ -40,11 +40,11 @@
     <Grid>
         <Grid RenderTransformOrigin="0.5,0.5">
             <Button x:Name="ButtonConnectToServer" Style="{StaticResource ButtonStyle}" Content="Подключиться" Click="Button_Click_Connect" 
-                        FontSize="25" FontFamily="Artifakt Element Heavy" Cursor="Hand" Background="#FFDDDDDD" BorderBrush="Black" Foreground="Black" BorderThickness="0,0,0,5" Height="50" Width="200" Margin="458,305,140,79" />
+                        FontSize="25" FontFamily="Artifakt Element Heavy" Cursor="Hand" Background="#FFDDDDDD" BorderBrush="Black" Foreground="Black" BorderThickness="0,0,0,5" Margin="700,500,300,100" />
         </Grid>
         <Grid RenderTransformOrigin="0.5,0.5">
             <Button x:Name="ButtonCreateServer" Style="{StaticResource ButtonStyle}" Content="Создать" Click="Button_Click_CreateServer" 
-                        FontSize="25" FontFamily="Artifakt Element Heavy" Cursor="Hand" Background="#FFDDDDDD" BorderBrush="Black" Foreground="Black" BorderThickness="0,0,0,5" Height="50" Width="200" Margin="140,306,460,78" />
+                        FontSize="25" FontFamily="Artifakt Element Heavy" Cursor="Hand" Background="#FFDDDDDD" BorderBrush="Black" Foreground="Black" BorderThickness="0,0,0,5" Margin="300,500,700,100" />
         </Grid>
     </Grid>
 </Window>

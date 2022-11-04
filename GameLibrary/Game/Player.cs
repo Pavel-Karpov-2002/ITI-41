@@ -5,6 +5,7 @@ using GameLibrary.Mines;
 using SharpDX;
 using SharpDX.Direct2D1;
 using SharpDX.DirectInput;
+using System;
 using System.Collections.Generic;
 
 namespace GameLibrary.Game
@@ -119,14 +120,17 @@ namespace GameLibrary.Game
         /// <param name="numberMine"></param>
         private void SpawnMine(GameObject playerObject, int numberMine)
         {
-            var mines = Property.Mines[numberMine];
-            if (mines.Item1 > 0)
+            if (Property.Mines != null)
             {
-                Mine mine = new Mine(Property.ReloadBuildMineTime);
-                mine = new DecoratorMineRadius(mine, mines.Item2);
-                Property.Mines[numberMine] = (mines.Item1 - 1, mines.Item2);
-                GameEvents.ChangeMinesList?.Invoke(Property.Mines);
-                maze.AddObjectOnScene(CreateMineComponent.CreateMine(playerObject.Transform.Position, mine, "Mine_" + (numberMine + 1) + ".png"));
+                var mines = Property.Mines[numberMine];
+                if (mines.Item1 > 0)
+                {
+                    Mine mine = new Mine(Property.ReloadBuildMineTime);
+                    mine = new DecoratorMineRadius(mine, mines.Item2);
+                    Property.Mines[numberMine] = (mines.Item1 - 1, mines.Item2);
+                    GameEvents.ChangeMinesList?.Invoke(Property.Mines);
+                    maze.AddObjectOnScene(CreateMineComponent.CreateMine(playerObject.Transform.Position, mine, "Mine_" + (numberMine + 1) + ".png"));
+                }
             }
         }
 
@@ -153,7 +157,17 @@ namespace GameLibrary.Game
         /// <param name="gameObject"></param>
         public void Lose(GameObject gameObject)
         {
+            string playerWin = "Ничья";
             maze.RemoveObjectFromScene(gameObject);
+            foreach (var playerName in maze.gameObjects)
+            {
+                if (playerName.GameObjectTag.IndexOf("Player_") != -1)
+                {
+                    playerWin = playerName.GameObjectTag;
+                }
+            }
+
+            GameEvents.EndGame?.Invoke(playerWin);
         }
     }
 

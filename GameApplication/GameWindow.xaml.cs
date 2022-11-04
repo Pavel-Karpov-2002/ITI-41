@@ -1,10 +1,12 @@
 ﻿using EngineLibrary.EngineComponents;
 using GameLibrary.Game;
 using GameLibrary.Maze;
+using System;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace GameApplication
 {
@@ -43,7 +45,7 @@ namespace GameApplication
             GameEvents.EndGame += EndGame;
             GameEvents.ChangeMinesList += UpdateMinesCount;
             GameEvents.AddMinesListToPlayer += AddPlayerMines;
-
+            
             mines = new List<(int, int)>();
             for(int i = 1; i <= countVarietiesMine; i++)
             {
@@ -75,9 +77,10 @@ namespace GameApplication
         private void EndGame(string winPlayer)
         {
             formhost.Visibility = Visibility.Hidden;
+            InfoPanel.Visibility = Visibility.Hidden;
 
             WinPlayerText.Foreground = new SolidColorBrush(Color.FromRgb(255, 255, 255));
-
+            Image_Background.ImageSource = new BitmapImage(new Uri(@"../../Images/WinBG.jpg", UriKind.Relative));
             WinPlayerText.Text = winPlayer + " Wins!";
 
             WinPanel.Visibility = Visibility.Visible;
@@ -85,18 +88,26 @@ namespace GameApplication
             GameEvents.ChangeMinesList -= UpdateMinesCount;
         }
 
-
         private void Button_Click_Ready(object sender, RoutedEventArgs e)
         {
             ButtonSuccess.IsEnabled = false;
             InfoPanel.Visibility = Visibility.Visible;
 
             formhost.Child = application.RenderForm;
+            Grid_Mines.Visibility = Visibility.Hidden;
+            Grid_Ready.Visibility = Visibility.Hidden;
 
             application.SetScene(mazeScene);
             application.Run();
         }
 
+        private void Button_Click_To_Menu(object sender, RoutedEventArgs e)
+        {
+            var gameMenu = new GameMenu();
+            gameMenu.Show();
+            this.Close();
+        }
+            
         private void Button_Click_Buy_Mine_1(object sender, RoutedEventArgs e)
         {
             if (CoinsCountSubtraction(0))
