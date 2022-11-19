@@ -3,6 +3,7 @@ using EngineLibrary.ObjectComponents;
 using GameLibrary.Maze;
 using GameLibrary.Walls;
 using GameLibrary.Game;
+using GameLibrary.ServerObjects;
 
 namespace GameLibrary.Mines
 {
@@ -11,9 +12,6 @@ namespace GameLibrary.Mines
     /// </summary>
     public class Explosion : ObjectScript
     {
-        /// <summary>
-        /// Экземпляр сцены игры
-        /// </summary>
         protected MazeScene maze;
 
         /// <summary>
@@ -21,10 +19,6 @@ namespace GameLibrary.Mines
         /// </summary>
         private float timeLife;
         
-        /// <summary>
-        /// Взрыв
-        /// </summary>
-        /// <param name="timeLife"></param>
         public Explosion (float timeLife)
         {
             this.timeLife = timeLife;
@@ -44,9 +38,13 @@ namespace GameLibrary.Mines
                 (wall.Script as Wall).Destruction(wall);
             }
 
-            if (gameObject.Collider.CheckIntersection(out GameObject player, "Player"))
+            if (maze.Connect.ConnectType == UDPConnect.ConnectType.Server && gameObject.Collider.CheckIntersection(out GameObject player, "Player"))
             {
-                (player.Script as Player).Lose(player);
+                if (player.Script is Player)
+                    (player.Script as Player).Lose(player);
+
+                if(player.Script is ConnectedPlayer)
+                    (player.Script as ConnectedPlayer).Lose(player);
             }
 
 
@@ -60,9 +58,13 @@ namespace GameLibrary.Mines
         {
             timeLife -= Time.DeltaTime;
 
-            if (gameObject.Collider.CheckIntersection(out GameObject player, "Player"))
+            if (maze.Connect.ConnectType == UDPConnect.ConnectType.Server && gameObject.Collider.CheckIntersection(out GameObject player, "Player"))
             {
-                (player.Script as Player).Lose(player);
+                if (player.Script is Player)
+                    (player.Script as Player).Lose(player);
+
+                if (player.Script is ConnectedPlayer)
+                    (player.Script as ConnectedPlayer).Lose(player);
             }
 
             if (timeLife <= 0)

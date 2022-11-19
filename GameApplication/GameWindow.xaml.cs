@@ -1,22 +1,22 @@
 ﻿using EngineLibrary.EngineComponents;
 using GameLibrary.Game;
 using GameLibrary.Maze;
+using GameLibrary.ServerObjects;
+using SharpDX;
 using System;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using UDPConnect;
 
 namespace GameApplication
 {
-    /// <summary>
-    /// Логика взаимодействия для GameWindow.xaml
-    /// </summary>
     public partial class GameWindow : Window
     {
         private readonly RenderingApplication application;
-        private readonly MazeScene mazeScene;
+        private MazeScene mazeScene;
 
         private static int countVarietiesMine = 3;
 
@@ -24,32 +24,28 @@ namespace GameApplication
         private int[] minePrice;
         private TextBlock[] mineCount;
 
-        /// <summary>
-        /// Мины: (Количество, радиус)
-        /// </summary>
+        // Мины: (Количество, радиус)
         public List<(int, int)> mines
         {
             get;
             set;
         }
 
-        /// <summary>
-        /// Конструктор класса
-        /// </summary>
         public GameWindow()
         {
             InitializeComponent();
 
             application = new RenderingApplication();
-            mazeScene = new MazeScene();
-            GameEvents.EndGame += EndGame;
+            mazeScene = MazeScene.instance;
+            mazeScene.RequestProcessing.EndGame += EndGame;
             GameEvents.ChangeMinesList += UpdateMinesCount;
             GameEvents.AddMinesListToPlayer += AddPlayerMines;
-            
+            mazeScene.RequestProcessing.SetPlayerPosition += SetPlayerPosition;
+
             mines = new List<(int, int)>();
             for(int i = 1; i <= countVarietiesMine; i++)
             {
-                mines.Add((0, i));
+                mines.Add((1, i));
             }
 
             minePrice = new int[countVarietiesMine];
@@ -68,37 +64,69 @@ namespace GameApplication
             TextCountCoins.Text = coinsCount.ToString();
         }
 
-        private void WindowClosing(object sender, System.ComponentModel.CancelEventArgs e)
+        private void Button_Click_Ready(object sender, RoutedEventArgs e)
         {
-            if(application != null)
-                application.Dispose();
+            if (mazeScene.RequestProcessing.MazeNumber != 0)
+            {
+                ButtonSuccess.IsEnabled = false;
+                InfoPanel.Visibility = Visibility.Visible;
+
+                formhost.Child = application.RenderForm;
+                Grid_Mines.Visibility = Visibility.Hidden;
+                Grid_Ready.Visibility = Visibility.Hidden;
+
+                application.SetScene(mazeScene);
+                application.Run();
+            }
+        }
+
+        private void SetPlayerPosition(Vector2 position, ConnectType type, string playerName)
+        {
+            this.Dispatcher.Invoke(() =>
+            {
+                PlayerConstructor player = new PlayerConstructor() { StartPosition = position };
+
+                if (type == ConnectType.Server)
+                {
+                    player.CreateServerPlayer(playerName);
+                    mazeScene.PlayerFactory = player;
+                }
+                if (type == ConnectType.Client)
+                {
+                    player.CreateConnectedPlayer(playerName);
+                    mazeScene.ServerObjects.Add((ServerObject)player.PlayerGameObject.Script);
+                }
+
+                mazeScene.AddObjectOnScene(player.PlayerGameObject);
+            });
         }
 
         private void EndGame(string winPlayer)
         {
-            formhost.Visibility = Visibility.Hidden;
-            InfoPanel.Visibility = Visibility.Hidden;
+            this.Dispatcher.Invoke(() =>
+            {
+                formhost.Visibility = Visibility.Hidden;
+                InfoPanel.Visibility = Visibility.Hidden;
 
-            WinPlayerText.Foreground = new SolidColorBrush(Color.FromRgb(255, 255, 255));
-            Image_Background.ImageSource = new BitmapImage(new Uri(@"../../Images/WinBG.jpg", UriKind.Relative));
-            WinPlayerText.Text = winPlayer + " Wins!";
+                WinPlayerText.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromRgb(0, 0, 0));
+                Image_Background.ImageSource = new BitmapImage(new Uri(@"../../Images/WinBG.jpg", UriKind.Relative));
+                if (winPlayer.IndexOf("Player") != -1)
+                    WinPlayerText.Text = "Вы " + (winPlayer == mazeScene.PlayerFactory.PlayerTag ? "победили!" : "проиграли!");
+                else
+                    WinPlayerText.Text = winPlayer;
 
-            WinPanel.Visibility = Visibility.Visible;
-            GameEvents.EndGame -= EndGame;
-            GameEvents.ChangeMinesList -= UpdateMinesCount;
+                WinPanel.Visibility = Visibility.Visible;
+                GameEvents.ChangeMinesList -= UpdateMinesCount;
+                mazeScene.RequestProcessing.SetPlayerPosition -= SetPlayerPosition;
+            });
         }
 
-        private void Button_Click_Ready(object sender, RoutedEventArgs e)
+        private void WindowClosing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            ButtonSuccess.IsEnabled = false;
-            InfoPanel.Visibility = Visibility.Visible;
-
-            formhost.Child = application.RenderForm;
-            Grid_Mines.Visibility = Visibility.Hidden;
-            Grid_Ready.Visibility = Visibility.Hidden;
-
-            application.SetScene(mazeScene);
-            application.Run();
+            Connect.instance.receiver.Close();
+            if (application != null)
+                application.Dispose();
+            Application.Current.Shutdown();
         }
 
         private void Button_Click_To_Menu(object sender, RoutedEventArgs e)
@@ -110,55 +138,49 @@ namespace GameApplication
             
         private void Button_Click_Buy_Mine_1(object sender, RoutedEventArgs e)
         {
-            if (CoinsCountSubtraction(0))
-            {
-                mines[0] = (mines[0].Item1 + 1, mines[0].Item2);
-                UpdateText(0);
-            }
+            BuyMines(0);
         }
 
         private void Button_Click_Buy_Mine_2(object sender, RoutedEventArgs e)
         {
-            if (CoinsCountSubtraction(1))
-            {
-                mines[1] = (mines[1].Item1 + 1, mines[1].Item2);
-                UpdateText(1);
-            }
+            BuyMines(1);
         }
 
         private void Button_Click_Buy_Mine_3(object sender, RoutedEventArgs e)
         {
-            if (CoinsCountSubtraction(2))
-            {
-                mines[2] = (mines[2].Item1 + 1, mines[2].Item2);
-                UpdateText(2);
-            }
+            BuyMines(2);
         }
 
         private void Button_Click_Sell_Mine_1(object sender, RoutedEventArgs e)
         {
-            if (mines[0].Item1 > 0)
-            {
-                mines[0] = (mines[0].Item1 - 1, mines[0].Item2);
-                CoinsCountSumm(0);
-            }
+            SellMines(0);
         }
 
         private void Button_Click_Sell_Mine_2(object sender, RoutedEventArgs e)
         {
-            if (mines[1].Item1 > 0)
-            {
-                mines[1] = (mines[1].Item1 - 1, mines[1].Item2);
-                CoinsCountSumm(1);
-            }
+            SellMines(1);
         }
 
         private void Button_Click_Sell_Mine_3(object sender, RoutedEventArgs e)
         {
-            if (mines[2].Item1 > 0)
+            SellMines(2);
+        }
+
+        private void BuyMines(int numMines)
+        {
+            if (CoinsCountSubtraction(numMines))
             {
-                mines[2] = (mines[2].Item1 - 1, mines[2].Item2);
-                CoinsCountSumm(2);
+                mines[numMines] = (mines[numMines].Item1 + 1, mines[numMines].Item2);
+                UpdateText(numMines);
+            }
+        }
+
+        private void SellMines(int numMines)
+        {
+            if (mines[numMines].Item1 > 1)
+            {
+                mines[numMines] = (mines[numMines].Item1 - 1, mines[numMines].Item2);
+                CoinsCountSumm(numMines);
             }
         }
 

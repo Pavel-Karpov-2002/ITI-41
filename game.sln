@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameLibrary", "GameLibrary\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameApplication", "GameApplication\GameApplication.csproj", "{8A774380-73AA-440F-97F4-14EE44057665}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UDPConnect", "UDPConnect\UDPConnect.csproj", "{198E8B3E-02F4-4DD9-8D5A-597AE1A30EA6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{8A774380-73AA-440F-97F4-14EE44057665}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8A774380-73AA-440F-97F4-14EE44057665}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8A774380-73AA-440F-97F4-14EE44057665}.Release|Any CPU.Build.0 = Release|Any CPU
+		{198E8B3E-02F4-4DD9-8D5A-597AE1A30EA6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{198E8B3E-02F4-4DD9-8D5A-597AE1A30EA6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{198E8B3E-02F4-4DD9-8D5A-597AE1A30EA6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{198E8B3E-02F4-4DD9-8D5A-597AE1A30EA6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

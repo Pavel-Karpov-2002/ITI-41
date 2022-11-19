@@ -28,5 +28,21 @@ namespace GameLibrary.Game
         /// (количество, радиус)
         /// </summary>
         public abstract List<(int, int)> Mines { get; set; }
+
+        /// <summary>
+        /// Количество мин
+        /// </summary>
+        public int CountMines
+        {
+            get
+            {
+                int count = 0;
+                for(int i = 0; i < Mines.Count; i++)
+                {
+                    count += Mines[i].Item1;
+                }
+                return count;
+            }
+        }
     }
 }

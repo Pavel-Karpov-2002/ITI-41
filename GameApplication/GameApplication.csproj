@@ -49,6 +49,9 @@
     <Reference Include="SharpDX.DirectInput, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
       <HintPath>..\packages\SharpDX.DirectInput.4.2.0\lib\net45\SharpDX.DirectInput.dll</HintPath>
     </Reference>
+    <Reference Include="SharpDX.Mathematics, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpDX.Mathematics.4.2.0\lib\net45\SharpDX.Mathematics.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Windows.Forms" />
@@ -127,6 +130,10 @@
     <ProjectReference Include="..\GameLibrary\GameLibrary.csproj">
       <Project>{34d614e7-86f8-47b8-a355-433b62a5a656}</Project>
       <Name>GameLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UDPConnect\UDPConnect.csproj">
+      <Project>{198e8b3e-02f4-4dd9-8d5a-597ae1a30ea6}</Project>
+      <Name>UDPConnect</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

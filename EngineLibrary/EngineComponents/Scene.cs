@@ -97,13 +97,5 @@ namespace EngineLibrary.EngineComponents
 
             gameObjectsToRemove.Clear();
         }
-
-        /// <summary>
-        /// Поведения при окончании сцены
-        /// </summary>
-        protected virtual void EndScene()
-        {
-            IsDrawScene = false;
-        }
     }
 }

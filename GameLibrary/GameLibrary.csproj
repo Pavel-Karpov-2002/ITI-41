@@ -62,7 +62,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Game\PlayerConnect.cs" />
+    <Compile Include="Game\LoseScript.cs" />
+    <Compile Include="ServerObjects\ConnectedPlayer.cs" />
+    <Compile Include="ServerObjects\ServerObject.cs" />
     <Compile Include="obj\Debug\.NETFramework,Version=v4.7.2.AssemblyAttributes.cs" />
     <Compile Include="obj\Release\.NETFramework,Version=v4.7.2.AssemblyAttributes.cs" />
     <Compile Include="Walls\Factory\BreakWallFactory.cs" />
@@ -89,6 +91,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="obj\Release\DesignTimeResolveAssemblyReferencesInput.cache" />
     <None Include="obj\Release\GameLibrary.csproj.CopyComplete" />
     <None Include="obj\Release\GameLibrary.csproj.CoreCompileInputs.cache" />
@@ -99,6 +102,10 @@
     <ProjectReference Include="..\EngineLibrary\EngineLibrary.csproj">
       <Project>{d5184c3c-1288-499a-8163-7d52cb099b23}</Project>
       <Name>EngineLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UDPConnect\UDPConnect.csproj">
+      <Project>{198e8b3e-02f4-4dd9-8d5a-597ae1a30ea6}</Project>
+      <Name>UDPConnect</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

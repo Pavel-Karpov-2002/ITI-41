@@ -1,10 +1,13 @@
 ﻿using EngineLibrary.EngineComponents;
 using EngineLibrary.ObjectComponents;
 using GameLibrary.Game;
+using GameLibrary.Mines;
+using GameLibrary.ServerObjects;
 using SharpDX;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
+using System.Threading;
+using UDPConnect;
 
 namespace GameLibrary.Maze
 {
@@ -13,34 +16,32 @@ namespace GameLibrary.Maze
     /// </summary>
     public class MazeScene : Scene
     {
-        /// <summary>
-        /// Статическая ссылка на класс
-        /// </summary>
         public static MazeScene instance = null;
 
-        /// <summary>
-        /// Фабрика создания элементов лабиринта
-        /// </summary>
+        public Connect Connect { get; set; }
+
+        public RequestProcess RequestProcessing { get; set; }
+
         public MazeElementsFactory ElementsFactory { get; private set; }
 
-        /// <summary>
-        /// Конструктор игрока
-        /// </summary>
-        public List<PlayerConstructor> PlayerFactory { get; private set; } = new List<PlayerConstructor>();
+        public PlayerConstructor PlayerFactory { get; set; }
 
-        /// <summary>
-        /// Пустые блоки
-        /// </summary>
         public readonly List<Vector2> emptyBlocks = new List<Vector2>();
 
-        /// <summary>
-        /// Создание игровых объектов на сцене
-        /// </summary>
+        private Thread receiveThread = null;
+
+        public List<ServerObject> ServerObjects { get; private set; }
+
+        public MazeScene()
+        {
+            ServerObjects = new List<ServerObject>();
+            instance = this;
+        }
+
         protected override void CreateGameObjectsOnScene()
         {
-            if (instance == null)
-                instance = this;
-
+            receiveThread = new Thread(new ThreadStart(Connect.ReceiveMessage));
+            receiveThread.Start();
             ElementsFactory = new MazeElementsFactory();
             GameObject gameObject = new GameObject();
             gameObject.InitializeObjectComponent(new TransformComponent(new Vector2(0f, 0f), new Size2F(27, 15)));
@@ -50,23 +51,34 @@ namespace GameLibrary.Maze
             gameObjects.Add(gameObject);
 
             CreateMaze();
+            RequestProcessing.ChangePosition += ChangeServerPositions;
+            RequestProcessing.SetMine += SetMine;
+        }
 
-            foreach (PlayerConstructor player in PlayerFactory)
+        private void ChangeServerPositions(Vector2 position, string tag)
+        {
+            foreach (var obj in ServerObjects)
             {
-                gameObjects.Add(player.CreatePlayer("Player_" + player.GetHashCode()));
+                if (obj.GameObject.GameObjectTag == tag)
+                {
+                    obj.SetPosition(position);
+                }
             }
         }
 
-        /// <summary>
-        /// Метод создания лабиринта
-        /// </summary>
+        private void SetMine(Vector2 positon, Int64 mineType)
+        {
+            Mine mine = new Mine(((Player)PlayerFactory.PlayerGameObject.Script).Property.ReloadBuildMineTime);
+            mine = new DecoratorMineRadius(mine, (int)mineType + 1);
+            AddObjectOnScene(CreateMineComponent.CreateMine(positon, mine, "Mine_" + (mineType + 1) + ".png"));
+        }
+
         public void CreateMaze()
         {
-            Random rnd = new Random();
-            string text = "Resources/Mazes/Maze_" + (rnd.Next(1, 3)) + ".bmp";
+            string text = "Resources/Mazes/Maze_" + (int)RequestProcessing.MazeNumber + ".bmp";
+            int playerNum = 0;
 
-            Bitmap bitmap = new Bitmap(text);
-
+            System.Drawing.Bitmap bitmap = new System.Drawing.Bitmap(text);
             for (int i = 0; i < bitmap.Height; i++)
             {
                 for (int j = 0; j < bitmap.Width; j++)
@@ -81,8 +93,11 @@ namespace GameLibrary.Maze
                         gameObject = ElementsFactory.CreateMazeElement(new Vector2(j, i), "StrengthWall_3");
                     else if (color.R == 0 && color.G == 255 && color.B == 0)
                         gameObject = ElementsFactory.CreateMazeElement(new Vector2(j, i), "BreakWall");
-                    else if (color.R == 255 && color.G == 0 && color.B == 0)
-                        PlayerFactory.Add(new PlayerConstructor() { StartPosition = new Vector2(j, i) }); // Отправлять позиции игроков на сервер, там их смешать и раздать клиентам
+                    else if (color.R == 255 && color.G == 0 && color.B == 0 && Connect.ConnectType == ConnectType.Server)
+                    {
+                        playerNum++;
+                        Connect.SendMessage(new Message(MessageType.PlayerPosition, new Vector2(j, i), "Player_" + playerNum)); // Отправлять позиции игроков на сервер
+                    }
                     else
                         emptyBlocks.Add(new Vector2(j, i));
 
@@ -92,37 +107,16 @@ namespace GameLibrary.Maze
             }
         }
 
-        /// <summary>
-        /// Добавление объекта в лист отрисовки
-        /// </summary>
-        /// <param name="gameObject">Игровой объект</param>
+        // Добавление объекта в лист отрисовки
         public void AddObjectOnScene(GameObject gameObject)
         {
             gameObjectsToAdd.Add(gameObject);
         }
 
-        /// <summary>
-        /// Удаления объекта из листа отрисовки
-        /// </summary>
-        /// <param name="gameObject">Игровой объект</param>
+        // Удаления объекта из листа отрисовки
         public void RemoveObjectFromScene(GameObject gameObject)
         {
             gameObjectsToRemove.Add(gameObject);
-
-            //EndScene();
-        }
-
-        /// <summary>
-        /// Поведение при завершении сцены
-        /// </summary>
-        protected override void EndScene()
-        {
-            base.EndScene();
-
-            string winPlayer;
-
-            winPlayer = PlayerFactory[0].PlayerTag;
-            GameEvents.EndGame?.Invoke(winPlayer);
         }
     }
 }

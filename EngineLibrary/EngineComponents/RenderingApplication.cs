@@ -1,8 +1,7 @@
-﻿using System;
-using System.Drawing;
+﻿using SharpDX.Direct2D1;
 using SharpDX.Windows;
-using SharpDX.Direct2D1;
-using System.Windows.Forms;
+using System;
+using System.Drawing;
 
 namespace EngineLibrary.EngineComponents
 {
@@ -26,30 +25,6 @@ namespace EngineLibrary.EngineComponents
         /// Форма отрисовки
         /// </summary>
         public RenderForm RenderForm { get; set; }
-
-        public InputHandler InputHandler
-        {
-            get => default;
-            set
-            {
-            }
-        }
-
-        public RenderingSystem RenderingSystem
-        {
-            get => default;
-            set
-            {
-            }
-        }
-
-        public Scene Scene
-        {
-            get => default;
-            set
-            {
-            }
-        }
 
         /// <summary>
         /// Конструктор класса, инциализирующий его компоненты

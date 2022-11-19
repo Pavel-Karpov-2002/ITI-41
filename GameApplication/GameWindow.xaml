@@ -61,7 +61,7 @@
                     <Button x:Name="ButtonAddMineOne" Style="{StaticResource ButtonStyle}" Content="+" Click="Button_Click_Buy_Mine_1" 
                         FontSize="48" FontFamily="Artifakt Element Heavy" Cursor="Hand" Background="#FFDDDDDD" BorderBrush="Black" Foreground="Black" BorderThickness="0,0,0,5" HorizontalAlignment="Center" VerticalAlignment="Top" Height="70" Width="50" />
                 </Grid>
-                <TextBlock x:Name="TextBlockCountMineOne" HorizontalAlignment="Center" TextWrapping="Wrap" Text="0" VerticalAlignment="Center" FontSize="36" FontFamily="Arial Black" Margin="0,326,0,0"/>
+                <TextBlock x:Name="TextBlockCountMineOne" HorizontalAlignment="Center" TextWrapping="Wrap" Text="1" VerticalAlignment="Center" FontSize="36" FontFamily="Arial Black" Margin="0,326,0,0"/>
                 <Grid Margin="0,320,0,0" HorizontalAlignment="Right" VerticalAlignment="Center">
                     <Button x:Name="ButtonSellMineOne" Style="{StaticResource ButtonStyle}" Content="-" Click="Button_Click_Sell_Mine_1" 
                         FontSize="48" FontFamily="Artifakt Element Heavy" Cursor="Hand" Background="#FFDDDDDD" BorderBrush="Black" Foreground="Black" BorderThickness="0,0,0,5" HorizontalAlignment="Center" VerticalAlignment="Center" Height="70" Width="50" />
@@ -76,7 +76,7 @@
                     <Button x:Name="ButtonAddMineTwo" Style="{StaticResource ButtonStyle}" Content="+" Click="Button_Click_Buy_Mine_2" 
                         FontSize="48" FontFamily="Artifakt Element Heavy" Cursor="Hand" Background="#FFDDDDDD" BorderBrush="Black" Foreground="Black" BorderThickness="0,0,0,5" HorizontalAlignment="Center" VerticalAlignment="Center" Height="70" Width="50" />
                 </Grid>
-                <TextBlock x:Name="TextBlockCountMineTwo" HorizontalAlignment="Center" TextWrapping="Wrap" Text="0" VerticalAlignment="Center" FontSize="36" FontFamily="Arial Black" Margin="0,326,0,0"/>
+                <TextBlock x:Name="TextBlockCountMineTwo" HorizontalAlignment="Center" TextWrapping="Wrap" Text="1" VerticalAlignment="Center" FontSize="36" FontFamily="Arial Black" Margin="0,326,0,0"/>
                 <Grid Margin="0,320,0,0" HorizontalAlignment="Right" VerticalAlignment="Center">
                     <Button x:Name="ButtonSellMineTwo" Style="{StaticResource ButtonStyle}" Content="-" Click="Button_Click_Sell_Mine_2" 
                         FontSize="48" FontFamily="Artifakt Element Heavy" Cursor="Hand" Background="#FFDDDDDD" BorderBrush="Black" Foreground="Black" BorderThickness="0,0,0,5" HorizontalAlignment="Center" VerticalAlignment="Center" Height="70" Width="50" />
@@ -91,7 +91,7 @@
                     <Button x:Name="ButtonAddMineThree" Style="{StaticResource ButtonStyle}" Content="+" Click="Button_Click_Buy_Mine_3" 
                         FontSize="48" FontFamily="Artifakt Element Heavy" Cursor="Hand" Background="#FFDDDDDD" BorderBrush="Black" Foreground="Black" BorderThickness="0,0,0,5" HorizontalAlignment="Center" VerticalAlignment="Center" Height="70" Width="50" />
                 </Grid>
-                <TextBlock x:Name="TextBlockCountMineThree" HorizontalAlignment="Center" TextWrapping="Wrap" Text="0" VerticalAlignment="Center" FontSize="36" FontFamily="Arial Black" Margin="0,326,0,0"/>
+                <TextBlock x:Name="TextBlockCountMineThree" HorizontalAlignment="Center" TextWrapping="Wrap" Text="1" VerticalAlignment="Center" FontSize="36" FontFamily="Arial Black" Margin="0,326,0,0"/>
                 <Grid Margin="0,320,0,0" HorizontalAlignment="Right" VerticalAlignment="Center">
                     <Button x:Name="ButtonSellMineThree" Style="{StaticResource ButtonStyle}" Content="-" Click="Button_Click_Sell_Mine_3" 
                         FontSize="48" FontFamily="Artifakt Element Heavy" Cursor="Hand" Background="#FFDDDDDD" BorderBrush="Black" Foreground="Black" BorderThickness="0,0,0,5" HorizontalAlignment="Center" VerticalAlignment="Center" Height="70" Width="50" />
@@ -103,9 +103,9 @@
             <WindowsFormsHost x:Name="formhost" Width="1024" Height="700" />
 
             <Grid x:Name="WinPanel" Visibility="Hidden">
-                <TextBlock x:Name="WinPlayerText" TextWrapping="Wrap" Text="Blue Player Wins!" VerticalAlignment="Top" Foreground="Red" FontFamily="Arial Black" FontSize="36" 
+                <TextBlock x:Name="WinPlayerText" TextWrapping="Wrap" Text="Ничья!" VerticalAlignment="Top" Foreground="Red" FontFamily="Arial Black" FontSize="36" 
                            Margin="50,60,50,0" TextAlignment="Center"/>
-                <Button x:Name="Button_To_Menu" Style="{StaticResource ButtonStyle}" Content="Меню" Click="Button_Click_To_Menu" 
+                <Button x:Name="Button_To_Menu" Style="{StaticResource ButtonStyle}" Content="Выйти из игры" Click="Button_Click_To_Menu" 
                         FontSize="25" FontFamily="Artifakt Element Heavy" Cursor="Hand" Background="#FFDDDDDD" BorderBrush="Black" Foreground="Black" BorderThickness="0,0,0,5" Height="50" Width="200" VerticalAlignment="Bottom" Margin="0,0,0,50" />
             </Grid>
         </Grid>

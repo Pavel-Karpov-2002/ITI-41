@@ -29,15 +29,5 @@ namespace GameLibrary.Game
         /// Событие изменения количества мин в окне
         /// </summary>
         public static AddMinesListToPlayerDelegate AddMinesListToPlayer { get; set; }
-
-        /// <summary>
-        /// Делегат события окончания игры
-        /// </summary>
-        public delegate void EndGameDelegate(string winPlayer);
-
-        /// <summary>
-        /// Событие окончания игры
-        /// </summary>
-        public static EndGameDelegate EndGame { get; set; }
     }
 }

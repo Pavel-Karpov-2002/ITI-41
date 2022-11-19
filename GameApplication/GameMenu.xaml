@@ -37,7 +37,8 @@
     <Window.Background>
         <ImageBrush ImageSource="Images/BackgroundWPF.jpg"/>
     </Window.Background>
-    <Grid>
+    <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+        <Label x:Name="Label_Count_Connects" Content="Подключено: ? / ?" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,190" FontSize="36" FontFamily="Arial Black"/>
         <Grid RenderTransformOrigin="0.5,0.5">
             <Button x:Name="ButtonConnectToServer" Style="{StaticResource ButtonStyle}" Content="Подключиться" Click="Button_Click_Connect" 
                         FontSize="25" FontFamily="Artifakt Element Heavy" Cursor="Hand" Background="#FFDDDDDD" BorderBrush="Black" Foreground="Black" BorderThickness="0,0,0,5" Margin="700,500,300,100" />
@@ -45,6 +46,7 @@
         <Grid RenderTransformOrigin="0.5,0.5">
             <Button x:Name="ButtonCreateServer" Style="{StaticResource ButtonStyle}" Content="Создать" Click="Button_Click_CreateServer" 
                         FontSize="25" FontFamily="Artifakt Element Heavy" Cursor="Hand" Background="#FFDDDDDD" BorderBrush="Black" Foreground="Black" BorderThickness="0,0,0,5" Margin="300,500,700,100" />
+            
         </Grid>
     </Grid>
 </Window>
